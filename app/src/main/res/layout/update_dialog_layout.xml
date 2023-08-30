@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/update_dialog_img"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/updataversion_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="@string/update_tip"
+        android:textColor="#295775"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/versionNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#295775"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:id="@+id/versionDescTv"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:textColor="#8e8e8e"
+        android:textSize="13sp" />
+
+
+    <LinearLayout
+        android:id="@+id/dialog_sure"
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:layout_width="240dp"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:background="@drawable/update_dialog_but_bg"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/uodate_confirm_text"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

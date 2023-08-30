@@ -1,0 +1,137 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+
+    signingConfigs {
+        onepPece {
+            storeFile file(sign.file)
+            storePassword sign.storePassword
+            keyAlias sign.keyAlias
+            keyPassword sign.keyPassword
+        }
+    }
+    namespace cfgs.namespace
+    compileSdkVersion cfgs.compileSdkVersion
+
+    defaultConfig {
+        applicationId cfgs.namespace
+
+        minSdkVersion cfgs.minSdkVersion
+        targetSdkVersion cfgs.targetSdkVersion
+        versionCode cfgs.versionCode
+        versionName cfgs.versionName
+
+        testInstrumentationRunner cfgs.testInstrumentationRunner
+        signingConfig signingConfigs.onepPece
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        // 去除多语言
+        resConfigs "zh", "zh-rCN", "zh-rHK", "zh-rTW"
+    }
+
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField 'String', 'SERVER_URL', '"http://192.168.2.30"'
+            buildConfigField 'Boolean', 'SHOW_LOG', 'true'
+        }
+        Test {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'SERVER_URL', '"http://127.0.0.1"'
+            buildConfigField 'Boolean', 'SHOW_LOG', 'true'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'SERVER_URL', '"http://127.0.0.1"'
+            buildConfigField 'Boolean', 'SHOW_LOG', 'false'
+        }
+    }
+    compileOptions {
+        sourceCompatibility cfgs.javaVersion
+        targetCompatibility cfgs.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = cfgs.jvmTarget
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation des.coreKtx
+    implementation des.appcompat
+
+
+    // Compose依赖库
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version" // 图标
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+
+    implementation project(path: ':utils')
+
+    // material3 动态主题颜色切换应用颜色
+    implementation 'androidx.compose.material3:material3:1.0.0-alpha11'
+    implementation 'androidx.core:core-ktx:1.9.0'
+
+    def accompanist_version = '0.28.0'
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-webview:$accompanist_version"
+
+    // 下拉刷新
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
+
+
+    // okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    // json
+    implementation 'com.google.code.gson:gson:2.8.9'
+    // eventbus
+    implementation 'org.greenrobot:eventbus:3.3.1'
+
+    // Paging 分页加载
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha17'
+
+    // lottie动画
+    def lottieVersion = '5.2.0'
+    implementation "com.airbnb.android:lottie-compose:$lottieVersion"
+
+
+    // Hilt 依赖注入
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+
+
+
+    testImplementation des.junit
+    androidTestImplementation des.extJunit
+    androidTestImplementation des.espressoCore
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+}

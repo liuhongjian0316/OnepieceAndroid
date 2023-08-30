@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">onePiece</string>
+    <string name="no_network">onePiece</string>
+    <string name="logoString">知行合一，大道至简</string>
+    <string name="update_tip">升级到新版本</string>
+    <string name="uodate_confirm_text">立即升级</string>
+
+    <!--tab-->
+    <item name="tab_first" type="string">发现</item>
+    <item name="tab_second" type="string">音乐</item>
+    <item name="tab_third" type="string">阅读</item>
+    <item name="tab_forth" type="string">工具</item>
+    <item name="tab_fifth" type="string">我的</item>
+
+    <!--tool item-->
+    <item name="clock_in" type="string">打卡提醒</item>
+    <!--mine item-->
+    <item name="theme_change" type="string">主题更换</item>
+</resources>
